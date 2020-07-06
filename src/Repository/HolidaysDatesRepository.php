@@ -19,6 +19,14 @@ class HolidaysDatesRepository extends ServiceEntityRepository
         parent::__construct($registry, HolidaysDates::class);
     }
 
+    public function clearTable()
+    {
+        $this->createQueryBuilder('h')
+            ->delete()
+            ->getQuery()
+            ->execute();
+    }
+
     // /**
     //  * @return HolidaysDates[] Returns an array of HolidaysDates objects
     //  */
