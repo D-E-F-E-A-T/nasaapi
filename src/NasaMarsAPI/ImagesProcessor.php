@@ -17,6 +17,7 @@ final class ImagesProcessor
                 ->setEarthDate(new \DateTime($photo['earth_date'] ?? null))
                 ->setCamera($photo['camera']['name'] ?? null)
                 ->setRover($photo['rover']['name'] ?? null)
+                ->setNasaid($photo['id'] ?? null)
                 ->setUrl($photo['img_src'] ?? null)
                 ->setSol($photo['sol'] ?? null);
             $marsPhotoCollection->add($marsPhoto);

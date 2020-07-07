@@ -42,6 +42,11 @@ class MarsPhotos
      */
     private $rover;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nasaid;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class MarsPhotos
     public function setRover(string $rover): self
     {
         $this->rover = $rover;
+
+        return $this;
+    }
+
+    public function getNasaid(): ?int
+    {
+        return $this->nasaid;
+    }
+
+    public function setNasaid(int $nasaid): self
+    {
+        $this->nasaid = $nasaid;
 
         return $this;
     }
