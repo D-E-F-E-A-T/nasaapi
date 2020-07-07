@@ -42,4 +42,5 @@ final class RefreshHolidaysDateCommand extends Command
 
         return 0;
     }
+
 }

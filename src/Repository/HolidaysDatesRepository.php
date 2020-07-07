@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\HolidaysDates;
@@ -14,45 +16,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class HolidaysDatesRepository extends ServiceEntityRepository
 {
+    use ClearTableTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, HolidaysDates::class);
     }
 
-    public function clearTable()
-    {
-        $this->createQueryBuilder('h')
-            ->delete()
-            ->getQuery()
-            ->execute();
-    }
-
-    // /**
-    //  * @return HolidaysDates[] Returns an array of HolidaysDates objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?HolidaysDates
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
