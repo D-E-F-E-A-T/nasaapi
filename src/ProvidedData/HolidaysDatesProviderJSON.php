@@ -17,16 +17,16 @@ class HolidaysDatesProviderJSON implements HolidaysDatesProviderInterface
 
     public function getHolidaysDates(): HolidaysDatesCollection
     {
-        if (file_exists($this->holidaysDatesFilePath)) {
-            $dates = json_decode(file_get_contents($this->holidaysDatesFilePath), true);
-            if (null === $dates) {
-                throw new \Exception('Invalid provided JSON file.');
-            }
-            foreach ($dates as $date) {
-                $this->holidaysDatesCollection->add(new \DateTime($date));
-            }
-        } else {
+        if (!file_exists($this->holidaysDatesFilePath)) {
             throw new \Exception('File not found. Please check HOLIDAYS_DATES_FILE_PATH parameter in your .env file.');
+        }
+
+        $dates = json_decode(file_get_contents($this->holidaysDatesFilePath), true);
+        if (null === $dates) {
+            throw new \Exception('Invalid provided JSON file.');
+        }
+        foreach ($dates as $date) {
+            $this->holidaysDatesCollection->add(new \DateTime($date));
         }
 
         return $this->holidaysDatesCollection;
