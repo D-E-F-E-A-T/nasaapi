@@ -28,11 +28,17 @@ final class RefreshHolidaysDateCommand extends Command
     {
         $this->holidaysDatesManager->getRepository(HolidaysDates::class)->clearTable();
 
-        foreach ($this->holidaysDatesProvider->getHolidaysDates() as $holidayDate) {
-            $this->holidaysDatesManager->persist((new HolidaysDates())->setDate($holidayDate));
-        }
+        try {
+            foreach ($this->holidaysDatesProvider->getHolidaysDates() as $holidayDate) {
+                $this->holidaysDatesManager->persist((new HolidaysDates())->setDate($holidayDate));
+            }
+        } catch (\Exception $exception) {
+            $output->writeln("<error>{$exception->getMessage()}</error>");
 
+            return 1;
+        }
         $this->holidaysDatesManager->flush();
+        $output->writeln('<info>Holidays dates updated correctly.</info>');
 
         return 0;
     }
