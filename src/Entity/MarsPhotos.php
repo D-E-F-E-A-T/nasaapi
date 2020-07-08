@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=MarsPhotosRepository::class)
  */
-class MarsPhotos
+class MarsPhotos implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -123,4 +123,16 @@ class MarsPhotos
 
         return $this;
     }
+
+    public function jsonSerialize()
+    {
+        return [
+            'url' => $this->url,
+            'earthDate' => $this->earthDate,
+            'rover' => $this->rover,
+            'camera' => $this->camera,
+        ];
+    }
+
+
 }
