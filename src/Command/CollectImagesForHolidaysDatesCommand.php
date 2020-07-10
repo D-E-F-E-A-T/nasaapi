@@ -34,6 +34,7 @@ final class CollectImagesForHolidaysDatesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        //TODO: Inject Repositories, add transaction, remove logic to service
         $this->entityManager->getRepository(MarsPhotos::class)->clearTable();
         $holidaysDates = $this->entityManager->getRepository(HolidaysDates::class)->findAll();
         if ([] === $holidaysDates) {
